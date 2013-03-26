@@ -9,6 +9,8 @@ from django_git.utils import *
 
 @auto_render
 def index(request, template_name='django_git/index.html'):
+    #repos = get_repos()
+    #import ipdb; ipdb.set_trace()   
     return template_name,{'repos': get_repos()}
 
 @auto_render
