@@ -13,7 +13,7 @@
             <td>{{ repo.commits.0.message }}</td>
             <td>{{ repo.commits.0.author.name }}</td>
             {% endcomment %}
-            <p><a href="{% url django-git-repo repo.git_dir|name %}">{{ repo.git_dir|name }}</a></p>
+            <p><a href="{% url 'django-git-repo' repo.git_dir|name %}">{{ repo.git_dir|name }}</a></p>
             {% for commit in repo.iter_commits %}
                 {{ commit.message }}
             {% endfor %}
