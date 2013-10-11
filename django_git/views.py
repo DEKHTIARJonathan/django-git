@@ -9,12 +9,11 @@ from django_git.utils import *
 
 @auto_render
 def index(request, template_name='django_git/index.html'):
-    #repos = get_repos()
-    #import ipdb; ipdb.set_trace()   
     return template_name,{'repos': get_repos()}
 
 @auto_render
 def repo(request, repo, template_name='django_git/repo.html'):
+    import ipdb; ipdb.set_trace() ############################## Breakpoint ##############################
     return template_name, {'repo': get_repo(repo)}
 
 @auto_render

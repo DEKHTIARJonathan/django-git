@@ -1,3 +1,4 @@
 *.pyc
 *.kpf
+*.sw*
 django_git.egg-info

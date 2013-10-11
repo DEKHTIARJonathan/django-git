@@ -3,10 +3,10 @@ import os
 
 from django import template
 register = template.Library()
- 
+
 @register.filter("name")
 def name(value):
-    return value.split(os.sep)[-2]
+    return value.split(os.sep)[-1]
 
 @register.filter("first_eight")
 def first_eight(value):
