@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django_git',
-    version='0.1',
+    version='0.1.1',
     description='django gitweb replacement',
     classifiers = [ 'Development Status :: 3 - Alpha',
         'Framework :: Django',
@@ -13,9 +13,9 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    author='Seth Buntin',
-    author_email='sethtrain@gmail.com',
-    url='http://code.google.com/p/django-git',
+    author='Seth Buntin, fork by Hobson Lane',
+    author_email='sethtrain@gmail.com, fork by hobsonlane@gmail.com',
+    url='http://code.google.com/p/django-git, fork at http://github.com/hobsonlane/django-git',
     packages=['django_git', 'django_git.templatetags'],
     package_data={ 'django_git' : ['templates/django_git/*.html', 'media/js/*.js']},
     zip_safe=False,
