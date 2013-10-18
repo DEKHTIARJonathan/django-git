@@ -6,7 +6,7 @@
     Repositories
 {% endblock %}
 
-{% block main_content %}
+{% block content %}
         {% for repo in repos %}
             {% comment %}
             <td><a href="{% url django-git-repo repo.path|name %}">{{ repo.path|name }}</a></td>
