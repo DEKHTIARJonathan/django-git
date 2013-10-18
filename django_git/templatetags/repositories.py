@@ -6,6 +6,7 @@ register = template.Library()
 
 @register.filter("name")
 def name(value):
+    print 'name(%s)' % value
     return value.split(os.sep)[-1]
 
 @register.filter("first_eight")
@@ -14,4 +15,5 @@ def first_eight(value):
 
 @register.filter("tuple_to_date")
 def tuple_to_date(value):
+    print 'tuple_to_date(%s)' % value
     return datetime(value[0], value[1], value[2], value[3], value[4], value[5], value[6])

@@ -6,10 +6,11 @@ from django.conf import settings
 def get_repos():
     repos = [get_repo(d) for d in os.listdir(settings.REPOS_ROOT)]
     print repos
-    return [r for r in repos if not (str(r).strip() in ('None', '', '.', '..'))]
+    return [r for r in repos if r is not None]
 
 def get_repo(name):
     repo_path = os.path.join(settings.REPOS_ROOT, name)
+    print 'get_repo(%s) gives repo_path=%s' % (name, repo_path)
     if os.path.isdir(repo_path):
         try:
             return Repo(repo_path)
