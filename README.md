@@ -1,23 +1,33 @@
 README
 ======
 
-Get the code via svn:
+## Install
+
+### From the Original Creator, Seth
+
+Get the latest source code from Seth's `git` repo with:
 
     git checkout git://github.com/sethtrain/django-git.git
 
+### From an Bleeding Edge Fork, by Hobson
+
+Add a line in requirements.txt pointing to Hobson's github fork:
+
+    -e git+git://github.com/hobsonlane/django-git.git@master#egg=django-git-0.1.1>=0.1.1
+
+Then install your requirements.txt to your virtualenv as usual, using `pip`:
+
+    pip install -r requirements.txt
+
+### Configure
+
 Add the django-git/django_git folder to your PYTHONPATH.
 
-Update your settings.py:
-
-    INSTALLED_APPS = (
-        ...
-        'django_git'
-        ...
-    )
+Add `"django_git"` to your INSTALLED_APPS in your Django project settings.py. Also add a line to settings.py to point django-git to the repositories you want to serve up:
 
     REPOS_ROOT = '/Users/seth/projects/git'
 
-And don't forget to include the urls.py:
+Include the django-git urls.py:
 
     urlpatterns = patterns('',
         ...
@@ -25,7 +35,7 @@ And don't forget to include the urls.py:
         ...
     )
 
-Then collect the static files, ensuring AppDirectoriesFinder is in STATICFILES_FINDERS:
+Make sure AppDirectoriesFinder is in `STATICFILES_FINDERS` in your `settings.py`, then collect the static files (unless staticfiles is a part of your production stack): 
 
     ./manage.py collectstatic -n
     # And if that outputs some js/jquery-1.2.6.min.js file and our js/commit.js, continue
