@@ -13,7 +13,7 @@ def index(request, template_name='django_git/index.html'):
 
 @auto_render
 def repo(request, repo, template_name='django_git/repo.html'):
-    import ipdb; ipdb.set_trace() ############################## Breakpoint ##############################
+    #import ipdb; ipdb.set_trace() ############################## Breakpoint ##############################
     return template_name, {'repo': get_repo(repo)}
 
 @auto_render

@@ -4,8 +4,9 @@ from git import *
 from django.conf import settings
 
 def get_repos():
-    repos = [get_repo(dir) for dir in os.listdir(settings.REPOS_ROOT)]
-    return [r for r in repos if not (r is None)]
+    repos = [get_repo(d) for d in os.listdir(settings.REPOS_ROOT)]
+    print repos
+    return [r for r in repos if not (str(r).strip() in ('None', '', '.', '..'))]
 
 def get_repo(name):
     repo_path = os.path.join(settings.REPOS_ROOT, name)
@@ -57,7 +58,7 @@ def auto_render(func):
     ... def test(request):
     ...     return 'base.html', {'oki':1}
     ...
-    >>> from django.http import HttpRequest, HttpResponse
+    >>> from django.http import HttpRequest
     >>> response = test(HttpRequest())
     >>> assert type(response) is HttpResponse
     >>> response = test(HttpRequest(), only_context=True)
