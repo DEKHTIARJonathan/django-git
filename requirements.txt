@@ -1,2 +1,2 @@
--e git+git://github.com/defunkt/pygments.git#egg=pygments
--e git+git://github.com/mm/gitpython.git#egg=gitpython
+pygments>=0.11
+gitpython>=0.1.4
