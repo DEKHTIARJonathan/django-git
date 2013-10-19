@@ -1,24 +1,36 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% load repositories %}
 
-{% block title %}
-    Repositories
-{% endblock %}
 
-{% block content %}
-        {% for repo in repos %}
-            {% comment %}
-            <td><a href="{% url django-git-repo repo.path|name %}">{{ repo.path|name }}</a></td>
-            <td>{{ repo.commits.0.message }}</td>
-            <td>{{ repo.commits.0.author.name }}</td>
-            {% endcomment %}
-            <pre>
-            <p><a href="{# url 'django-git-repo' repo.git_dir|name #}"> -->
-                {{ repo.git_dir|name }}</a></p>
-            </pre>
-            {% for commit in repo.iter_commits %}
-                {{ commit.message }}
+    {# block meta #}
+        {% block title %}
+            Repositories
+        {% endblock %}
+
+        {# block style_base #}
+            {% block extra_style %}
+                <link href="{% static 'django_git/css/table.css' %}" rel="stylesheet" type="text/css">
+            {% endblock %}
+        {# endblock #}
+    {# endblock #}
+
+    {% block content %}
+            <table>
+            {% for repo in repos %}
+                <tr>
+                    <td><a href="{% url 'django-git-repo' repo.path|name %}">{{ repo.path|name }}</a></td>
+                    <td>{{ repo.commits.0.message }}</td>
+                    <td>{{ repo.commits.0.author.name }}</td>
+                    {% comment %}
+                        <p><a href="{% url 'django-git-repo' repo.path|name %}">
+                            {{ repo.path|name }}</a></p>
+                        {% for commit in repo.iter_commits %}
+                            {{ commit.message }}
+                        {% endfor %}
+                    {% endcomment %}
+                </tr>
             {% endfor %}
-        {% endfor %}
-{% endblock %}
+            </table>
+    {% endblock %}

@@ -3,9 +3,9 @@ from pygments.lexers import guess_lexer_for_filename
 from pygments.formatters import HtmlFormatter
 
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, get_list_or_404
+#from django.shortcuts import get_object_or_404, get_list_or_404
 
-from django_git.utils import *
+from django_git.utils import auto_render, get_repos, get_repo, get_commit, get_blob
 
 @auto_render
 def index(request, template_name='django_git/index.html'):

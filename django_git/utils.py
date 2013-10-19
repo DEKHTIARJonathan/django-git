@@ -1,5 +1,5 @@
 import os
-from git import *
+from git import Repo, Tree
 
 from django.conf import settings
 
@@ -12,7 +12,9 @@ def get_repo(name):
     repo_path = os.path.join(settings.REPOS_ROOT, name)
     print 'get_repo(%s) gives repo_path=%s' % (name, repo_path)
     if os.path.isdir(repo_path):
+        print 'and isdir is true'
         try:
+            print 'Repo(repo_path).path => %s ' % repr(Repo(repo_path).git_dir)
             return Repo(repo_path)
         except Exception:
             pass
@@ -78,7 +80,7 @@ def auto_render(func):
             del(kwargs['only_context'])
             response = func(request, *args, **kwargs)
             if isinstance(response, HttpResponse) or isinstance(response, HttpResponseRedirect):
-                raise Except("cannot return context dictionary because a HttpResponseRedirect as been found")
+                raise RuntimeError("cannot return context dictionary because a HttpResponseRedirect as been found")
             (template_name, context) = response
             return context
 

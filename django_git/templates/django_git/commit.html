@@ -12,7 +12,7 @@
     {{ repo.path|name }} : {{ commit|first_eight }}
 {% endblock %}
 
-{% block main_content %}
+{% block content %}
     <p id="commit" style="display: none;">{{ commit }}</p>
     {% if diffs %}
         {% for d in diffs %}
