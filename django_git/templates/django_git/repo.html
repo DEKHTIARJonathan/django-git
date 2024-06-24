@@ -3,7 +3,7 @@
 {% load repositories %}
 
 {% block title %}
-    {{ repo.git_dir|name }}
+    {{ repo.working_tree_dir|path2title }}
 {% endblock %}
 
 {% block content %}
@@ -14,16 +14,16 @@
             <th>Author</th>
             <th>Date</th>
         </tr>
-        {% for commit in repo.commits %}
+        {% for commit in repo.iter_commits %}
         <tr>
-            <td><a href="{% url 'django-git-commit' repo.path|name commit %}">{{ commit|first_eight }}</a></td>
+            <td><a href="{% url 'django-git-commit' repo.working_tree_dir|path2title commit %}">{{ commit|first_eight }}</a></td>
             <td>{{ commit.message }}</td>
             <td>{{ commit.committer.name }}</td>
-            <td>{{ commit.committed_date|tuple_to_date|date:"m/d/Y" }}</td>
+            <td>{{ commit.committed_date|int_to_date|date }}</td>
         </tr>
         {% endfor %}
     </table>
-    
+
     {% if repo.heads %}
         <h3>Heads</h3>
         <ul>

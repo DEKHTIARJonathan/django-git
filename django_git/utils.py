@@ -1,20 +1,21 @@
+from pathlib import Path
 import os
 from git import Repo, Tree
 
 from django.conf import settings
 
 def get_repos():
-    repos = [get_repo(d) for d in os.listdir(settings.REPOS_ROOT)]
-    print repos
-    return [r for r in repos if r is not None]
+    repos = []
+    for dir in os.listdir(settings.REPOS_ROOT):
+        repo = get_repo(dir)
+        if repo is not None:
+            repos.append(repo)
+    return repos
 
 def get_repo(name):
     repo_path = os.path.join(settings.REPOS_ROOT, name)
-    print 'get_repo(%s) gives repo_path=%s' % (name, repo_path)
     if os.path.isdir(repo_path):
-        print 'and isdir is true'
         try:
-            print 'Repo(repo_path).path => %s ' % repr(Repo(repo_path).git_dir)
             return Repo(repo_path)
         except Exception:
             pass
@@ -29,12 +30,7 @@ def get_blob(repo, commit, file):
     repo = get_repo(repo)
     commit = repo.commit(commit)
     tree = commit.tree
-    for path_seg in file.split(os.sep):
-        t = tree.get(path_seg)
-        if isinstance(t, Tree):
-            tree = t
-        else:
-            blob = t
+    blob = tree[file]
     return blob
 
 
@@ -52,7 +48,7 @@ def auto_render(func):
     """Decorator that automaticaly call the render_to_response shortcut.
 
     The view must return a tuple with two items : a template filename and the desired context.
-    HttpResponse object could be also returned. it's possible to override the default 
+    HttpResponse object could be also returned. it's possible to override the default
     template filename by calling a decorated view with an "template_name" parameter
     or to get only the context dictionary via "only_context" parameter.
 

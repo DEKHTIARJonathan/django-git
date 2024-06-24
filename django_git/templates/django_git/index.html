@@ -11,7 +11,7 @@
 
         {# block style_base #}
             {% block extra_style %}
-                <link href="{% static 'django_git/css/table.css' %}" rel="stylesheet" type="text/css">
+                <!-- <link href="{% static 'django_git/css/table.css' %}" rel="stylesheet" type="text/css"> -->
             {% endblock %}
         {# endblock #}
     {# endblock #}
@@ -20,12 +20,12 @@
             <table>
             {% for repo in repos %}
                 <tr>
-                    <td><a href="{% url 'django-git-repo' repo.path|name %}">{{ repo.path|name }}</a></td>
-                    <td>{{ repo.commits.0.message }}</td>
-                    <td>{{ repo.commits.0.author.name }}</td>
+                    <td><a href="{% url 'django-git-repo' repo.working_tree_dir|path2title %}">{{ repo.working_tree_dir|path2title }}</a></td>
+                    <td>{{ repo.head.commit.message }}</td>
+                    <td>{{ repo.head.commit.author.name }}</td>
                     {% comment %}
-                        <p><a href="{% url 'django-git-repo' repo.path|name %}">
-                            {{ repo.path|name }}</a></p>
+                        <p><a href="{% url 'django-git-repo' repo.working_tree_dir|name %}">
+                            {{ repo.working_tree_dir|name }}</a></p>
                         {% for commit in repo.iter_commits %}
                             {{ commit.message }}
                         {% endfor %}

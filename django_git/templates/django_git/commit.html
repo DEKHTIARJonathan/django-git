@@ -9,17 +9,17 @@
 {% endblock %}
 
 {% block title %}
-    {{ repo.path|name }} : {{ commit|first_eight }}
+    {{ repo.working_tree_dir|path2title }}: {{ commit|first_eight }}
 {% endblock %}
 
 {% block content %}
-    <p id="commit" style="display: none;">{{ commit }}</p>
+    <p id="commit">{{ repo.working_tree_dir|path2title }}: {{ commit }}</p>
     {% if diffs %}
         {% for d in diffs %}
             <p>
-                <span id="f{{ forloop.counter }}">{{ d.a_path }}</span>
+                <span id="f{{ forloop.counter }}">{{ d.a_blob.path }}</span>
                 &nbsp;&nbsp;&nbsp;
-                <a href="#" id="dl{{ forloop.counter }}" class="diff-link">diff</a> | 
+                <a href="#" id="dl{{ forloop.counter }}" class="diff-link">diff</a> |
                 {% if not d.deleted_file %}
                     <a href="#" id="bl{{ forloop.counter }}" class="blob-link">blob</a>
                 {% else %}
